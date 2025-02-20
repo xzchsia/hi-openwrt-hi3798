@@ -37,17 +37,15 @@ jobs:
         echo "--------------------------硬盘信息--------------------------"
         echo "硬盘数量: $(ls /dev/sd* | grep -v [1-9] | wc -l)" && df -hT
     
+    - name: Checkout
+      uses: actions/checkout@v2
+    
     - name: 合并分区 - Combine Disks
       uses: easimon/maximize-build-space@master
       with:
         swap-size-mb: 1024
         temp-reserve-mb: 100
-        root-reserve-mb: 1024
-
-    - name: Checkout
-      uses: actions/checkout@main
-      with:
-          fetch-depth: 0
+        root-reserve-mb: 1024    
 
     - name: Initialization Environment
       env:
@@ -57,13 +55,13 @@ jobs:
         sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync qemu-utils
         sudo timedatectl set-timezone "Asia/Shanghai"
     
-    - name: 尝试建立缓存工具链 - Cache Toolchain
-      # if: env.CACHE_TOOLCHAIN == 'true'
-      uses: stupidloud/cachewrtbuild@main
-      with:
-        ccache: true
-        mixkey: histb-openwrt
-        prefix: histb-openwrt
+    # - name: 尝试建立缓存工具链 - Cache Toolchain
+    #   # if: env.CACHE_TOOLCHAIN == 'true'
+    #   uses: stupidloud/cachewrtbuild@main
+    #   with:
+    #     ccache: true
+    #     mixkey: histb-openwrt
+    #     prefix: histb-openwrt
 
     - name: make hiop
       run: |
