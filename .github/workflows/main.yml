@@ -55,13 +55,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     
-    - name: 尝试建立缓存工具链 - Cache Toolchain
-      # if: env.CACHE_TOOLCHAIN == 'true'
-      uses: stupidloud/cachewrtbuild@main
-      with:
-        ccache: true
-        mixkey: histb-openwrt
-        prefix: histb-openwrt
+    # - name: 尝试建立缓存工具链 - Cache Toolchain
+    #   # if: env.CACHE_TOOLCHAIN == 'true'
+    #   uses: stupidloud/cachewrtbuild@main
+    #   with:
+    #     ccache: true
+    #     mixkey: histb-openwrt
+    #     prefix: histb-openwrt
 
     - name: make hiop
       run: |
